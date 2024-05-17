@@ -1,0 +1,210 @@
+.frame10 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-31xl);
+  background-color: var(--white);
+  width: 746px;
+  height: 593px;
+}
+.bookcover-icon {
+  position: absolute;
+  top: 63px;
+  left: 76px;
+  width: 153px;
+  height: 214px;
+  object-fit: cover;
+}
+.author,
+.booktitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 150%;
+  font-weight: 800;
+  display: inline-block;
+  width: 642px;
+}
+.author {
+  top: 67px;
+  font-size: var(--font-size-xl);
+  font-weight: 300;
+  width: 308px;
+}
+.book-title4 {
+  top: 63px;
+  left: 255px;
+  width: 642px;
+  height: 97px;
+  font-size: var(--font-size-29xl);
+}
+.book-title4,
+.div1,
+.line {
+  position: absolute;
+}
+.line {
+  top: 297.5px;
+  left: 75.5px;
+  border-top: 1px solid var(--gray-text);
+  box-sizing: border-box;
+  width: 610px;
+  height: 1px;
+}
+.div1 {
+  top: 30px;
+  left: 0;
+  line-height: 150%;
+  display: inline-block;
+  width: 97.3px;
+}
+.parent,
+.publication-date {
+  position: absolute;
+  width: 420.7px;
+}
+.publication-date {
+  top: 0;
+  left: 0;
+  font-size: var(--font-size-xl);
+  line-height: 150%;
+  font-weight: 600;
+  display: inline-block;
+}
+.parent {
+  top: 403px;
+  left: 76px;
+  height: 57px;
+}
+.publisher1,
+.secker-and-warburg {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  line-height: 150%;
+  display: inline-block;
+  width: 431.7px;
+}
+.publisher1 {
+  top: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  width: 229.8px;
+}
+.publisher {
+  position: absolute;
+  top: 319px;
+  left: 76px;
+  width: 431.7px;
+  height: 57px;
+}
+.fable {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  line-height: 150%;
+  display: inline-block;
+  width: 264.8px;
+}
+.genre,
+.genre1 {
+  position: absolute;
+  width: 333.7px;
+}
+.genre1 {
+  top: 0;
+  left: 0;
+  font-size: var(--font-size-xl);
+  line-height: 150%;
+  font-weight: 600;
+  display: inline-block;
+}
+.genre {
+  top: 487px;
+  left: 76px;
+  height: 57px;
+}
+.book-id-child {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-21xl);
+  background-color: var(--color-red);
+  width: 194px;
+  height: 44px;
+}
+.book-id-child,
+.book-id7,
+.div2 {
+  position: absolute;
+}
+.div2 {
+  top: calc(50% - 18px);
+  left: calc(50% - 38px);
+  line-height: 150%;
+  font-weight: 800;
+}
+.book-id7 {
+  top: 221px;
+  left: 255px;
+  width: 194px;
+  height: 44px;
+  text-align: center;
+  font-size: var(--book-title-size);
+  color: var(--white);
+}
+.copies {
+  position: absolute;
+  top: calc(50% - 18px);
+  left: calc(50% - 52px);
+  line-height: 150%;
+  font-weight: 800;
+}
+.book-id8 {
+  position: absolute;
+  top: 221px;
+  left: 459px;
+  width: 194px;
+  height: 44px;
+  text-align: center;
+  font-size: var(--book-title-size);
+  color: var(--white);
+}
+.book-id-inner {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-21xl);
+  background-color: var(--color-red);
+}
+.book-id-inner,
+.book-id9,
+.tag {
+  position: absolute;
+  width: 105px;
+  height: 27px;
+}
+.tag {
+  top: 0;
+  left: calc(50% - 52.5px);
+  line-height: 150%;
+  font-weight: 800;
+  display: inline-block;
+}
+.book-id9 {
+  top: 177px;
+  left: 255px;
+  text-align: center;
+  font-size: var(--author-size);
+  color: var(--white);
+}
+.book-pop-up {
+  width: 746px;
+  position: relative;
+  height: 593px;
+  overflow: hidden;
+  max-width: 90%;
+  max-height: 90%;
+  text-align: left;
+  font-size: var(--font-size-lg);
+  color: var(--gray-text);
+  font-family: var(--author);
+}

@@ -1,0 +1,129 @@
+.logo-icon2 {
+  width: 62px;
+  position: relative;
+  height: 59px;
+  object-fit: cover;
+}
+.school-name1 {
+  font-weight: 800;
+}
+.library-system6,
+.school-name1,
+.system1 {
+  position: relative;
+  line-height: 150%;
+}
+.library-system6 {
+  font-size: var(--font-size-9xl);
+  letter-spacing: 0.02em;
+  font-weight: 800;
+}
+.system1 {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.logo10 {
+  width: 514px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.message {
+  top: 38px;
+  left: 26px;
+  font-weight: 500;
+  width: 362px;
+  height: 146px;
+}
+.message,
+.pleasesaveyourreferencecode,
+.referencecode {
+  position: absolute;
+  line-height: 150%;
+  display: inline-block;
+}
+.pleasesaveyourreferencecode {
+  top: 267px;
+  left: 67px;
+  font-size: var(--font-size-smi);
+  width: 279px;
+  height: 21px;
+}
+.referencecode {
+  top: 228px;
+  left: 142px;
+  width: 129px;
+  height: 27px;
+}
+.container {
+  width: 413px;
+  position: relative;
+  border-radius: var(--br-mini);
+  background-color: var(--color-ghostwhite);
+  height: 321px;
+  text-align: center;
+  color: var(--color-black);
+}
+.submitbutton-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-3xs);
+  width: 245.1px;
+  height: 45px;
+}
+.proceed {
+  position: absolute;
+  top: 8px;
+  left: 80.7px;
+  font-size: var(--font-size-xl);
+  line-height: 150%;
+  font-weight: 800;
+  font-family: var(--author);
+  color: var(--white);
+  text-align: left;
+}
+.submitbutton {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  width: 245.1px;
+  position: relative;
+  height: 45px;
+}
+.borrowing-form-pop-up,
+.logo-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.logo-parent {
+  gap: var(--gap-11xl);
+}
+.borrowing-form-pop-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-11xl);
+  background-color: var(--white);
+  width: 514px;
+  height: 652px;
+  overflow: hidden;
+  padding: var(--padding-16xl) 0;
+  box-sizing: border-box;
+  max-width: 90%;
+  max-height: 90%;
+}
+.borrow-pop-up {
+  width: 100%;
+  position: relative;
+  height: 652px;
+  text-align: left;
+  font-size: var(--author-size);
+  color: var(--maroon);
+  font-family: var(--author);
+}

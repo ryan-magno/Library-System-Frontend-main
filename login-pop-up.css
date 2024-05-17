@@ -1,0 +1,146 @@
+.bottom-red {
+  position: absolute;
+  top: 796px;
+  left: 0;
+  background-color: var(--color-red);
+  width: 1435px;
+  height: 10px;
+}
+.logo-icon,
+.top-red {
+  position: absolute;
+  top: 0;
+}
+.top-red {
+  left: 15px;
+  background-color: var(--color-red);
+  width: 1435px;
+  height: 10px;
+}
+.logo-icon {
+  left: 169.5px;
+  width: 145px;
+  height: 136px;
+  object-fit: cover;
+}
+.library-system2,
+.school-name {
+  position: absolute;
+  top: 136px;
+  left: 0;
+  line-height: 150%;
+  font-weight: 800;
+}
+.library-system2 {
+  top: 172px;
+  left: 72px;
+  font-size: var(--font-size-17xl);
+  letter-spacing: 0.02em;
+}
+.system {
+  top: 226px;
+  left: 85.5px;
+  font-size: var(--author-size);
+  letter-spacing: 0.15em;
+  line-height: 150%;
+  text-transform: uppercase;
+}
+.id,
+.logo3,
+.system {
+  position: absolute;
+}
+.logo3 {
+  top: 69px;
+  left: 476.5px;
+  width: 484px;
+  height: 250px;
+  color: var(--maroon);
+}
+.id {
+  top: 367px;
+  left: 201px;
+  line-height: 150%;
+}
+.id-input {
+  border: 0;
+  outline: 0;
+  font-weight: 500;
+  font-family: var(--author);
+  font-size: var(--font-size-xl);
+  background-color: var(--color-gainsboro);
+  top: 413px;
+  border-radius: var(--br-81xl);
+  width: 1035px;
+  height: 74px;
+  padding: 20px var(--padding-16xl) 30px;
+  box-sizing: border-box;
+  color: var(--gray-text);
+}
+.id-input,
+.password,
+.password1 {
+  position: absolute;
+  left: 201px;
+}
+.password {
+  top: 497px;
+  line-height: 150%;
+}
+.password1 {
+  border: 0;
+  outline: 0;
+  font-weight: 500;
+  font-family: var(--author);
+  font-size: var(--font-size-xl);
+  background-color: var(--color-gainsboro);
+  top: 543px;
+  border-radius: var(--br-81xl);
+  width: 1035px;
+  height: 74px;
+  padding: var(--padding-lgi) var(--padding-16xl) 21px;
+  box-sizing: border-box;
+  color: var(--gray-text);
+}
+.log-in-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-21xl);
+  background-color: var(--color-red);
+  width: 248px;
+  height: 58px;
+}
+.log-in5 {
+  position: absolute;
+  top: 11px;
+  left: calc(50% - 98px);
+  line-height: 150%;
+  font-weight: 800;
+  display: inline-block;
+  width: 197px;
+}
+.log-in4 {
+  position: absolute;
+  top: 673px;
+  left: 594px;
+  width: 248px;
+  height: 58px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--white);
+}
+.login-pop-up {
+  width: 1435px;
+  position: relative;
+  border-radius: var(--br-31xl);
+  background-color: var(--white);
+  height: 806px;
+  overflow: hidden;
+  max-width: 90%;
+  max-height: 90%;
+  text-align: left;
+  font-size: var(--book-title-size);
+  color: var(--gray-text);
+  font-family: var(--author);
+}
