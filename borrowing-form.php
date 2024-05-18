@@ -184,12 +184,13 @@
     </div>
 
     <?php
+// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database connection parameters
     $servername = "localhost"; // Server name
     $username = "root"; // Default username for XAMPP
     $password = ""; // Default password for XAMPP
-    $database = "school_library"; // Your database name
+    $database = "school_library2"; // Your database name
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $database);
@@ -212,42 +213,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = isset($_POST["firstName"]) ? sanitize_input($_POST["firstName"]) : "";
     $lastName = isset($_POST["lastName"]) ? sanitize_input($_POST["lastName"]) : "";
     $bookId = isset($_POST["bookId"]) ? sanitize_input($_POST["bookId"]) : "";
-    $librarianId = isset($_POST["librarianId"]) ? sanitize_input($_POST["librarianId"]) : "";
 
-    // Validate input
-    if (empty($librarianId)) {
-        echo "Error: Librarian ID is empty.";
-    } else {
-        // Check if the librarian_id exists in the librarians table
-        $librarianCheckSql = "SELECT * FROM librarians WHERE librarian_id = '$librarianId'";
-        $librarianResult = $conn->query($librarianCheckSql);
-
-        if ($librarianResult->num_rows == 0) {
-            // Librarian with the given ID doesn't exist, handle accordingly
-            echo "Error: Librarian with ID $librarianId doesn't exist.";
-        } else {
-            // Librarian exists, proceed with insertion into borrow_records table
-            // SQL query to insert form data into the borrow_records table
-            $borrowSql = "INSERT INTO borrow_records (patron_id, librarian_id, book_id) 
-                          VALUES ('$patronId', '$librarianId', '$bookId')";
-
-            if ($conn->query($borrowSql) === TRUE) {
-                // Display pop-up after successful submission
-                echo "<script>
-                        var popup = document.getElementById('borrowingFormPopUpPopup');
-                        popup.style.display = 'flex';
-                      </script>";
-            } else {
-                echo "Error: " . $borrowSql . "<br>" . $conn->error;
-            }
+    // Check if the patron exists
+    $checkPatronQuery = "SELECT * FROM patrons WHERE patron_id = '$patronId'";
+    $result = $conn->query($checkPatronQuery);
+    if ($result->num_rows == 0) {
+        // Patron does not exist, insert patron details into patrons table
+        $insertPatronQuery = "INSERT INTO patrons (patron_id, first_name, last_name) VALUES ('$patronId', '$firstName', '$lastName')";
+        if ($conn->query($insertPatronQuery) !== TRUE) {
+            echo "Error inserting patron: " . $conn->error;
+            exit;
         }
+    }
+
+    // Construct the SQL query to insert data into borrow_records table
+    $sql = "INSERT INTO borrow_records (patron_id, book_id) VALUES ('$patronId', '$bookId')";
+
+    // Execute the SQL query
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     // Close connection
     $conn->close();
 }
 ?>
-
 
 
   <script>
