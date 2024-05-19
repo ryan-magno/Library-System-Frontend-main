@@ -186,19 +186,8 @@
     <?php
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection parameters
-    $servername = "localhost"; // Server name
-    $username = "root"; // Default username for XAMPP
-    $password = ""; // Default password for XAMPP
-    $database = "school_library2"; // Your database name
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    // Include the database connection file
+    include 'db_connect.php';
 
     // Function to sanitize user input to prevent SQL injection
     function sanitize_input($input) {
@@ -214,32 +203,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = isset($_POST["lastName"]) ? sanitize_input($_POST["lastName"]) : "";
     $bookId = isset($_POST["bookId"]) ? sanitize_input($_POST["bookId"]) : "";
 
+    // Validate form inputs (you can add more validation as needed)
+
     // Check if the patron exists
-    $checkPatronQuery = "SELECT * FROM patrons WHERE patron_id = '$patronId'";
-    $result = $conn->query($checkPatronQuery);
+    $checkPatronQuery = "SELECT * FROM patrons WHERE patron_id = ?";
+    $stmt = $conn->prepare($checkPatronQuery);
+    $stmt->bind_param("s", $patronId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
     if ($result->num_rows == 0) {
         // Patron does not exist, insert patron details into patrons table
-        $insertPatronQuery = "INSERT INTO patrons (patron_id, first_name, last_name) VALUES ('$patronId', '$firstName', '$lastName')";
-        if ($conn->query($insertPatronQuery) !== TRUE) {
-            echo "Error inserting patron: " . $conn->error;
-            exit;
+        $insertPatronQuery = "INSERT INTO patrons (patron_id, first_name, last_name) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($insertPatronQuery);
+        $stmt->bind_param("sss", $patronId, $firstName, $lastName);
+        if ($stmt->execute()) {
+            echo "New patron created successfully";
+        } else {
+            echo "Error inserting patron: " . $stmt->error;
         }
+        $stmt->close();
     }
 
     // Construct the SQL query to insert data into borrow_records table
-    $sql = "INSERT INTO borrow_records (patron_id, book_id) VALUES ('$patronId', '$bookId')";
+    $borrowQuery = "INSERT INTO borrow_records (patron_id, book_id) VALUES (?, ?)";
+    $stmt = $conn->prepare($borrowQuery);
+    $stmt->bind_param("ss", $patronId, $bookId);
 
     // Execute the SQL query
-    if ($conn->query($sql) === TRUE) {
+    if ($stmt->execute()) {
         echo "New record created successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 
-    // Close connection
+    // Close prepared statement and connection
+    $stmt->close();
     $conn->close();
 }
 ?>
+
 
 
   <script>

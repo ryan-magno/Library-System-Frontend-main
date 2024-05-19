@@ -34,50 +34,43 @@
     </div>
 
     <?php
-    // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Database connection parameters
-        $servername = "localhost"; // Server name
-        $username = "root"; // Default username for XAMPP
-        $password = ""; // Default password for XAMPP
-        $database = "school_library"; // Your database name
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'db_connect.php';
 
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $database);
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        // Function to sanitize user input to prevent SQL injection
-        function sanitize_input($input) {
-            $input = trim($input);
-            $input = stripslashes($input);
-            $input = htmlspecialchars($input);
-            return $input;
-        }
-
-        // Sanitize and store the user input
-        $userId = sanitize_input($_POST["userId"]);
-        $userPassword = sanitize_input($_POST["userPassword"]);
-
-        // SQL query to check if user credentials are valid
-        $sql = "SELECT * FROM librarians WHERE librarian_id = '$userId' AND password = '$userPassword'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows == 1) {
-            // User authenticated successfully
-            header("Location: admin.php");
-            exit;
-        } else {
-            // Invalid credentials
-            echo "<script>alert('Invalid username or password!');</script>";
-        }
-
-        // Close connection
-        $conn->close();
+    // Function to sanitize user input to prevent SQL injection
+    function sanitize_input($input) {
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        return $input;
     }
-    ?>
+
+    // Sanitize and store the user input
+    $userId = sanitize_input($_POST["userId"]);
+    $userPassword = sanitize_input($_POST["userPassword"]);
+
+    // Prepare and bind parameters
+    $stmt = $conn->prepare("SELECT * FROM librarians WHERE librarian_id = ? AND password = ?");
+    $stmt->bind_param("ss", $userId, $userPassword);
+
+    // Execute the query
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        // User authenticated successfully
+        header("Location: admin.php");
+        exit;
+    } else {
+        // Invalid credentials
+        echo "<script>alert('Invalid username or password!');</script>";
+    }
+
+    // Close statement and connection
+    $stmt->close();
+    $conn->close();
+}
+?>
 </body>
 </html>
