@@ -34,11 +34,9 @@
     </div>
 
     <?php
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'db_connect.php';
+include 'db_connect.php';
 
-    // Function to sanitize user input to prevent SQL injection
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function sanitize_input($input) {
         $input = trim($input);
         $input = stripslashes($input);
@@ -46,31 +44,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $input;
     }
 
-    // Sanitize and store the user input
     $userId = sanitize_input($_POST["userId"]);
     $userPassword = sanitize_input($_POST["userPassword"]);
 
-    // Prepare and bind parameters
     $stmt = $conn->prepare("SELECT * FROM librarians WHERE librarian_id = ? AND password = ?");
     $stmt->bind_param("ss", $userId, $userPassword);
 
-    // Execute the query
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // User authenticated successfully
-        header("Location: admin.php");
-        exit;
+        session_start();
+        $_SESSION['userId'] = $userId;
+        echo "<script>window.parent.postMessage('" . json_encode(['success' => true]) . "', '*');</script>";
     } else {
-        // Invalid credentials
-        echo "<script>alert('Invalid username or password!');</script>";
+        echo "<script>window.parent.postMessage('" . json_encode(['success' => false, 'message' => 'Invalid username or password!']) . "', '*');</script>";
     }
 
-    // Close statement and connection
     $stmt->close();
     $conn->close();
 }
 ?>
+
 </body>
 </html>
