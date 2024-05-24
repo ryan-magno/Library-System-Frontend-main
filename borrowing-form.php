@@ -202,8 +202,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastName = isset($_POST["lastName"]) ? sanitize_input($_POST["lastName"]) : "";
     $bookId = isset($_POST["bookId"]) ? sanitize_input($_POST["bookId"]) : "";
 
-    // Validate form inputs (you can add more validation as needed)
-
     // Check if the patron exists
     $checkPatronQuery = "SELECT * FROM patrons WHERE patron_id = ?";
     $stmt = $conn->prepare($checkPatronQuery);
@@ -225,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 
-    // Construct the SQL query to insert data into borrow_records table
+    //SQL query to insert data into borrow_records table
     $borrowQuery = "INSERT INTO borrow_records (patron_id, book_id) VALUES (?, ?)";
     $stmt = $conn->prepare($borrowQuery);
     $stmt->bind_param("ss", $patronId, $bookId);
@@ -237,13 +235,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $stmt->error;
     }
 
-    // Close prepared statement and connection
     $stmt->close();
     $conn->close();
 }
 ?>
-
-
 
   <script>
     var home = document.getElementById("home");
