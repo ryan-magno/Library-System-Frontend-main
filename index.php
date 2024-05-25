@@ -184,45 +184,48 @@ document.addEventListener("DOMContentLoaded", function () {
                     loginPopUpPopup.style.backgroundColor = "rgba(61, 61, 61, 0.55)";
                     loginPopUpPopup.style.alignItems = "center";
                     loginPopUpPopup.style.justifyContent = "center";
+
+                    // Get the login form element
+                    var loginForm = loginPopUpPopup.querySelector('form');
+
+                    // Add the event listener to the login form
+                    if (loginForm) {
+                        loginForm.addEventListener("submit", function (e) {
+                            e.preventDefault(); // Prevent default form submission
+
+                            // Get form data
+                            const formData = new FormData(loginForm);
+
+                            // Prepare AJAX request
+                            fetch('login-pop-up.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Login response:', data); // Debugging statement
+
+                                // Handle login response
+                                if (data.success) {
+                                    console.log('Redirecting to admin.php...'); // Debugging statement
+                                    window.location.href = "admin.php"; // Redirect to admin page
+                                } else {
+                                    alert(data.message); // Display error message
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        });
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching login-pop-up.php:', error);
                 });
         });
-
-        // Directly target the form element
-        var loginForm = document.querySelector("#loginPopUpPopup form");
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Get form data
-            const formData = new FormData(loginForm);
-
-            // Prepare AJAX request
-            fetch('login-pop-up.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Login response:', data); // Debugging statement
-
-                // Handle login response
-                if (data.success) {
-                    console.log('Redirecting to admin.php...'); // Debugging statement
-                    window.location.href = "admin.php"; // Redirect to admin page
-                } else {
-                    alert(data.message); // Display error message
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
     }
 });
 </script>
-
 
 </body>
 </html>

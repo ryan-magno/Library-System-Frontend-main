@@ -34,6 +34,7 @@
     </div>
 
     <?php
+session_start();
 include 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -54,11 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        session_start();
         $_SESSION['userId'] = $userId;
-        echo "<script>window.parent.postMessage('" . json_encode(['success' => true]) . "', '*');</script>";
+        echo json_encode(['success' => true]);
     } else {
-        echo "<script>window.parent.postMessage('" . json_encode(['success' => false, 'message' => 'Invalid username or password!']) . "', '*');</script>";
+        echo json_encode(['success' => false, 'message' => 'Invalid username or password!']);
     }
 
     $stmt->close();
