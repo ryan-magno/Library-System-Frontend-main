@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['userId'])) {
+    header("Location: admin.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,69 +171,41 @@
     </div>
   </div>
 
-  <div id="loginPopUpPopupContent" class="popup-overlay" style="display: none"></div>
+  <div id="loginPopUpPopup" class="popup-overlay" style="display: none">
+    <div class="login-pop-up">
+        <!-- ... -->
+        <form method="post" action="login.php">
+            <!-- ... -->
+        </form>
     </div>
+</div>
 
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var logInButton = document.getElementById("logInButton");
-    var loginPopUpPopup = document.getElementById("loginPopUpPopup");
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var logInButton = document.getElementById("logInButton");
+        var loginPopUpPopup = document.getElementById("loginPopUpPopup");
 
-    if (logInButton && loginPopUpPopup) {
-        logInButton.addEventListener("click", function () {
-            // Fetch login-pop-up.php content
-            fetch('login-pop-up.php')
-                .then(response => response.text())
-                .then(data => {
-                    // Set the content to the loginPopUpPopup div
-                    loginPopUpPopup.innerHTML = data;
-                    loginPopUpPopup.style.display = "flex";
-                    loginPopUpPopup.style.zIndex = 100;
-                    loginPopUpPopup.style.backgroundColor = "rgba(61, 61, 61, 0.55)";
-                    loginPopUpPopup.style.alignItems = "center";
-                    loginPopUpPopup.style.justifyContent = "center";
-
-                    // Get the login form element
-                    var loginForm = loginPopUpPopup.querySelector('form');
-
-                    // Add the event listener to the login form
-                    if (loginForm) {
-                        loginForm.addEventListener("submit", function (e) {
-                            e.preventDefault(); // Prevent default form submission
-
-                            // Get form data
-                            const formData = new FormData(loginForm);
-
-                            // Prepare AJAX request
-                            fetch('login-pop-up.php', {
-                                method: 'POST',
-                                body: formData
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log('Login response:', data); // Debugging statement
-
-                                // Handle login response
-                                if (data.success) {
-                                    console.log('Redirecting to admin.php...'); // Debugging statement
-                                    window.location.href = "admin.php"; // Redirect to admin page
-                                } else {
-                                    alert(data.message); // Display error message
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching login-pop-up.php:', error);
-                });
-        });
-    }
-});
-</script>
+        if (logInButton && loginPopUpPopup) {
+            logInButton.addEventListener("click", function () {
+                // Fetch login-pop-up.php content
+                fetch('login-pop-up.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        // Set the content to the loginPopUpPopup div
+                        loginPopUpPopup.innerHTML = data;
+                        loginPopUpPopup.style.display = "flex";
+                        loginPopUpPopup.style.zIndex = 100;
+                        loginPopUpPopup.style.backgroundColor = "rgba(61, 61, 61, 0.55)";
+                        loginPopUpPopup.style.alignItems = "center";
+                        loginPopUpPopup.style.justifyContent = "center";
+                    })
+                    .catch(error => {
+                        console.error('Error fetching login-pop-up.php:', error);
+                    });
+            });
+        }
+    });
+    </script>
 
 </body>
 </html>

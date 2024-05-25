@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <title>Login Page</title>
-
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./login-pop-up.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" />
@@ -19,7 +18,7 @@
             <div class="library-system2">LIBRARY SYSTEM</div>
             <b class="system">Learning Resource Center</b>
         </div>
-        <form method="post">
+        <form method="post" action="login.php">
             <b class="id">ID</b>
             <input class="id-input" type="text" name="userId" placeholder="Type here..." required />
 
@@ -32,6 +31,7 @@
             </button>
         </form>
     </div>
+
 
     <?php
 session_start();
