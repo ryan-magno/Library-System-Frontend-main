@@ -59,7 +59,7 @@
             <div class="borrow-book-child"></div>
             <div class="borrow-book1">Borrow Book</div>
         </button></a>
-        <a href="edit-book.html"><button class="books" id="books">
+        <a href="books.php"><button class="books" id="books">
             <div class="books-child"></div>
             <div class="books1">Books</div>
         </button></a>
@@ -90,7 +90,7 @@
         var books = document.getElementById("books");
         if (books) {
             books.addEventListener("click", function (e) {
-                window.location.href = "./edit-book.html";
+                window.location.href = "./books.php";
             });
         }
     </script>
