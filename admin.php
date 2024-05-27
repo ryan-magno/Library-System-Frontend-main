@@ -45,17 +45,18 @@
             <div class="header2">Lost</div>
             <b class="header3">92</b>
         </button>
-        <button class="overdue">
-            <div class="borrowed-child"></div>
-            <div class="borrowed-item"></div>
-            <div class="header2">Overdue</div>
-            <b class="header3">92</b>
-        </button>
+        <button class="overdue" id="overdue"> 
+    <div class="borrowed-child"></div>
+    <div class="borrowed-item"></div>
+    <div class="header2">Overdue</div>
+    <b class="header3">92</b>
+</button>
+
         <a href="history.html"><button class="history" id="history">
             <div class="history-child"></div>
             <div class="history1">History</div>
         </button></a>
-        <a href="borrowing-form.html"><button class="borrow-book" id="borrowBook">
+        <a href="borrowing-form.php"><button class="borrow-book" id="borrowBook">
             <div class="borrow-book-child"></div>
             <div class="borrow-book1">Borrow Book</div>
         </button></a>
@@ -63,6 +64,9 @@
             <div class="books-child"></div>
             <div class="books1">Books</div>
         </button></a>
+        <div id="message">
+        <!-- Success message will be displayed here -->
+    </div>
     </div>
 
     <script>
@@ -73,12 +77,13 @@
             });
         }
 
-        var history = document.getElementById("history");
-        if (history) {
-            history.addEventListener("click", function (e) {
-                window.open("./history.html");
-            });
-        }
+        var historyButton = document.getElementById("history");
+if (historyButton) {
+    historyButton.addEventListener("click", function (e) {
+        window.open("./history.html");
+    });
+}
+
 
         var borrowBook = document.getElementById("borrowBook");
         if (borrowBook) {
@@ -93,6 +98,37 @@
                 window.location.href = "./books.php";
             });
         }
+
+        var overdueButton = document.getElementById("overdue"); // Get the overdue button by its id
+if (overdueButton) {
+    overdueButton.addEventListener("click", function (e) {
+        console.log("Overdue button clicked");
+        // Use AJAX to send a POST request to generate_report.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "generate_report.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // When the request is completed, you can handle the response here
+                // For example, display a message to the user or redirect them
+                alert(xhr.responseText); // Display the response (e.g., success message)
+                // You can also redirect the user to another page
+                window.location.href = "admin.php";
+            }
+        };
+        xhr.send(); // Send the request
+    });
+}
     </script>
+
+<?php
+// Check if the success parameter is set and display the success message
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $pdfFilePath = $_GET['pdfFilePath'];
+    echo '<div id="message">Report generated successfully. <a href="' . $pdfFilePath . '">Download PDF</a></div>';
+}
+?>
+
+
 </body>
 </html>
