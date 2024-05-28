@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $currentYear = date('Y');
 
     // Fetch data from the database
-    // Modify the query according to your database schema
+    // Modify the query according to the database schema
     $query = "
     SELECT DATE_FORMAT(borrow_date, '%M %e, %Y') AS date, COUNT(*) AS count
     FROM borrow_records

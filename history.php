@@ -224,7 +224,6 @@
                 }
             });
         }
-
         function fetchBorrowedBookDetails(referenceNumber) {
             $.ajax({
                 url: 'this_page.php',

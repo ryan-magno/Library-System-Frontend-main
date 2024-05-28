@@ -65,7 +65,6 @@
             <div class="books1">Books</div>
         </button></a>
         <div id="message">
-        <!-- Success message will be displayed here -->
     </div>
     </div>
 
@@ -85,6 +84,7 @@ if (historyButton) {
 }
 
 
+        
         var borrowBook = document.getElementById("borrowBook");
         if (borrowBook) {
             borrowBook.addEventListener("click", function (e) {
